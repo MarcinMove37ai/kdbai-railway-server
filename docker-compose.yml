@@ -1,0 +1,26 @@
+# Docker Compose dla lokalnego testowania
+# Nie używany na Railway, tylko do rozwoju lokalnego
+
+services:
+  kdbai:
+    build: .
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+    environment:
+      - KDB_LICENSE_B64=${KDB_LICENSE_B64}
+      - VDB_DIR=/tmp/kx/data/vdb
+      - THREADS=8
+    volumes:
+      - vdbdata:/tmp/kx/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["/usr/local/bin/health-check.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  vdbdata:
+    driver: local
