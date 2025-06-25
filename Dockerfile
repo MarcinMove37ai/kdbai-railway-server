@@ -18,10 +18,6 @@ RUN apk add --no-cache \
 # Etap 2: budowa aplikacji
 FROM portal.dl.kx.com/kdbai-db:latest AS production
 
-# Ustawienia bezpieczeństwa - non-root user
-RUN groupadd -g 1001 kdbai && \
-    useradd -u 1001 -g kdbai -s /bin/sh kdbai
-
 # Zmienne środowiskowe
 ENV VDB_DIR="/tmp/kx/data/vdb" \
     THREADS="8" \
@@ -36,8 +32,6 @@ RUN mkdir -p /tmp/kx/data && \
 COPY --chown=kdbai:kdbai scripts/health-check.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/health-check.sh
 
-# Przełączenie na non-root user
-USER kdbai
 
 # Eksponowanie portów
 EXPOSE 8081 8082
