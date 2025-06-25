@@ -24,9 +24,7 @@ ENV VDB_DIR="/tmp/kx/data/vdb" \
     KDB_LOG_LEVEL="INFO"
 
 # Tworzenie katalogów roboczych
-RUN mkdir -p /tmp/kx/data && \
-    chown -R kdbai:kdbai /tmp/kx/data && \
-    chmod 755 /tmp/kx/data
+RUN mkdir -p /tmp/kx/data && chmod 755 /tmp/kx/data
 
 # Kopiowanie pliku health check
 COPY --chown=kdbai:kdbai scripts/health-check.sh /usr/local/bin/
