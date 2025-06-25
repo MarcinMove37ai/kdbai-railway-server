@@ -19,8 +19,8 @@ RUN apk add --no-cache \
 FROM portal.dl.kx.com/kdbai-db:latest AS production
 
 # Ustawienia bezpieczeństwa - non-root user
-RUN addgroup -g 1001 -S kdbai && \
-    adduser -u 1001 -S kdbai -G kdbai
+RUN groupadd -g 1001 kdbai && \
+    useradd -u 1001 -g kdbai -s /bin/sh kdbai
 
 # Zmienne środowiskowe
 ENV VDB_DIR="/tmp/kx/data/vdb" \
