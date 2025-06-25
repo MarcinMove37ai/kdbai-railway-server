@@ -59,16 +59,3 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         platforms: linux/amd64
-
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-    - name: Deploy to Railway
-      uses: railway/cli@v1
-      with:
-        command: up --service kdbai
-      env:
-        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
