@@ -26,17 +26,11 @@ ENV VDB_DIR="/tmp/kx/data/vdb" \
 # Tworzenie katalogów roboczych
 RUN mkdir -p /tmp/kx/data && chmod 755 /tmp/kx/data
 
-# Kopiowanie pliku health check
-COPY --chown=kdbai:kdbai scripts/health-check.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/health-check.sh
 
 
 # Eksponowanie portów
 EXPOSE 8081 8082
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD /usr/local/bin/health-check.sh
 
 # Volume dla danych (opcjonalnie)
 VOLUME ["/tmp/kx/data"]
