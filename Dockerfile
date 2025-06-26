@@ -32,8 +32,5 @@ RUN mkdir -p /tmp/kx/data && chmod 755 /tmp/kx/data
 EXPOSE 8081 8082
 
 
-# Volume dla danych (opcjonalnie)
-VOLUME ["/tmp/kx/data"]
-
 # Komenda startowa
 CMD ["sh", "-c", "exec /opt/kx/bin/kdbai-db"]
